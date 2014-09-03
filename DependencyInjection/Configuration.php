@@ -22,9 +22,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
           ->children()
-            ->scalarNode('public_key')->end()
-            ->scalarNode('private_key')->end()
-            ->scalarNode('subdomain')->end()
+            ->scalarNode('public_key')->defaultNull()->end()
+            ->scalarNode('private_key')->defaultNull()->end()
+            ->scalarNode('subdomain')->defaultNull()->end()
           ->end()
         ;
 

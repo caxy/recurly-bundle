@@ -25,14 +25,8 @@ class CaxyRecurlyExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        if (isset($config['subdomain'])) {
-            $container->setParameter('caxy_recurly.subdomain', $config['subdomain']);
-        }
-        if (isset($config['private_key'])) {
-            $container->setParameter('caxy_recurly.private_key', $config['private_key']);
-        }
-        if (isset($config['public_key'])) {
-            $container->setParameter('caxy_recurly.public_key', $config['public_key']);
-        }
+        $container->setParameter('caxy_recurly.subdomain', $config['subdomain']);
+        $container->setParameter('caxy_recurly.private_key', $config['private_key']);
+        $container->setParameter('caxy_recurly.public_key', $config['public_key']);
     }
 }
