@@ -1,0 +1,24 @@
+{
+    "name": "caxy/recurly-bundle",
+    "description": "Recurly integration bundle for Symfony",
+    "require": {
+        "recurly/recurly-client": "~2.3.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Benjamin Doherty",
+            "email": "bdoherty@caxy.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Caxy\\Bundle\\RecurlyBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+parameters:
+    caxy_recurly.client.class: Recurly_Client
+    caxy_recurly.client.factory.class: Caxy\Bundle\RecurlyBundle\ClientFactory
+
+services:
+    caxy_recurly.client:
+        class: %caxy_recurly.client.class%
+        factory_class: %caxy_recurly.client.factory.class%
+        factory_method: create
+        arguments:
+            - %caxy_recurly.subdomain%
+            - %caxy_recurly.private_key%
