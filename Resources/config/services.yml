@@ -1,6 +1,7 @@
 parameters:
     caxy_recurly.client.class: Recurly_Client
     caxy_recurly.client.factory.class: Caxy\Bundle\RecurlyBundle\ClientFactory
+    caxy_recurly.listener.authentication.class: Caxy\Bundle\RecurlyBundle\EventListener\AuthenticationListener
 
 services:
     caxy_recurly.client:
@@ -10,3 +11,9 @@ services:
         arguments:
             - %caxy_recurly.subdomain%
             - %caxy_recurly.private_key%
+
+    caxy_recurly.listener.authentication:
+        class: %caxy_recurly.listener.authentication.class%
+        arguments: [ @caxy_recurly.client, @session ]
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.success, method: onAuthenticationSuccess }
