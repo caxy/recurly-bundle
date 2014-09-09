@@ -2,7 +2,7 @@
     "name": "caxy/recurly-bundle",
     "description": "Recurly integration bundle for Symfony",
     "require": {
-        "recurly/recurly-client": "~2.2@dev"
+        "recurly/recurly-client": "~2.3@dev"
     },
     "license": "MIT",
     "authors": [
