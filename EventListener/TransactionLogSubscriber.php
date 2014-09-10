@@ -5,12 +5,25 @@ namespace Caxy\Bundle\RecurlyBundle\EventListener;
 use Caxy\Bundle\RecurlyBundle\Entity\Transaction;
 use Caxy\Bundle\WebhookBundle\Event\WebhookEvent;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Doctrine\Common\Persistence\ObjectRepository;
 
+/**
+ * Class TransactionLogSubscriber
+ *
+ * @package Caxy\Bundle\RecurlyBundle\EventListener
+ */
 class TransactionLogSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var ObjectManager
+     */
     private $entityManager;
 
+    /**
+     * @var ObjectRepository
+     */
     private $or;
 
     public function __construct(ManagerRegistry $managerRegistry, $className)
@@ -19,6 +32,12 @@ class TransactionLogSubscriber implements EventSubscriberInterface
         $this->or = $this->entityManager->getRepository($className);
     }
 
+    /**
+     * High priority event listener logs the transaction or stops
+     * event propagation if it has already been or is being handled.
+     *
+     * @param WebhookEvent $event
+     */
     public function onWebhookPre(WebhookEvent $event)
     {
         $payload = $event->getPayload();
@@ -39,6 +58,11 @@ class TransactionLogSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * Low priority event listener marks the transaction as completed.
+     *
+     * @param WebhookEvent $event
+     */
     public function onWebhookPost(WebhookEvent $event)
     {
         $payload = $event->getPayload();
