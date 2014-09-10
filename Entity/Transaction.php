@@ -77,7 +77,7 @@ class Transaction
     }
 
     /**
-     * Get locked
+     * Get semaphore
      *
      * @return boolean
      */
