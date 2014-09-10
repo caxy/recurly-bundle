@@ -2,6 +2,8 @@ parameters:
     caxy_recurly.client.class: Recurly_Client
     caxy_recurly.client.factory.class: Caxy\Bundle\RecurlyBundle\ClientFactory
     caxy_recurly.listener.authentication.class: Caxy\Bundle\RecurlyBundle\EventListener\AuthenticationListener
+    caxy_recurly.model.transaction.class: Caxy\Bundle\RecurlyBundle\Entity\Transaction
+    caxy_recurly.subscriber.transaction_log.class: Caxy\Bundle\RecurlyBundle\EventListener\TransactionLogSubscriber
 
 services:
     caxy_recurly.client:
@@ -17,3 +19,9 @@ services:
         arguments: [ @caxy_recurly.client, @session ]
         tags:
             - { name: kernel.event_listener, event: security.authentication.success, method: onAuthenticationSuccess }
+
+    caxy_recurly.subscriber.transaction_log:
+        class: %caxy_recurly.subscriber.transaction_log.class%
+        arguments: [ @doctrine, %caxy_recurly.model.transaction.class% ]
+        tags:
+            - { name: webhook.event_subscriber }
